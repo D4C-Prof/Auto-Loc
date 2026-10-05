@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
 import tn.esprit.autoloc.domain.CategorieVehicule;
 import tn.esprit.autoloc.domain.StatutVehicule;
 import tn.esprit.autoloc.domain.Vehicule;
@@ -30,8 +31,7 @@ public class FirstEspritBabyApplication {
 						"208",
 						CategorieVehicule.CITADINE,
 						new BigDecimal("90.00"),
-						StatutVehicule.DISPONIBLE
-				);
+						StatutVehicule.DISPONIBLE, null, null, null, null);
 
 				Vehicule v2 = new Vehicule(
 						null,
@@ -40,8 +40,7 @@ public class FirstEspritBabyApplication {
 						"Golf 8",
 						CategorieVehicule.BERLINE,
 						new BigDecimal("150.00"),
-						StatutVehicule.LOUE
-				);
+						StatutVehicule.LOUE, null, null, null, null);
 
 				Vehicule v3 = new Vehicule(
 						null,
@@ -50,8 +49,7 @@ public class FirstEspritBabyApplication {
 						"RAV4",
 						CategorieVehicule.SUV,
 						new BigDecimal("220.00"),
-						StatutVehicule.DISPONIBLE
-				);
+						StatutVehicule.DISPONIBLE, null, null, null, null);
 
 				vehiculeRepository.saveAll(List.of(v1, v2, v3));
 				System.out.println(">>> 3 véhicules de démonstration insérés avec succès !");
