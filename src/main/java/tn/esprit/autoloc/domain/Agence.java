@@ -23,8 +23,8 @@ public class Agence {
     private String ville;
     private String adresse;
     private String telephone;
-    @OneToMany (mappedBy="agence")
+    @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
     private List<Vehicule> vehicule;
-    @OneToMany (mappedBy="agence")
+    @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
     private List<Employe> employee;
 }

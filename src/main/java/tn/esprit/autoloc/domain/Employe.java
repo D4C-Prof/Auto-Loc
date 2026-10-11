@@ -22,6 +22,6 @@ public class Employe {
 
     @Enumerated(EnumType.STRING)
     private RoleEmploye role;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Agence agence;
 }

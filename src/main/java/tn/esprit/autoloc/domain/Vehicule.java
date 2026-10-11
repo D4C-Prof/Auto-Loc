@@ -32,12 +32,12 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private StatutVehicule statut;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Agence agence;
-    @OneToMany(mappedBy="vehicule")
+    @OneToMany(mappedBy="vehicule", fetch = FetchType.LAZY)
     private List<Maintenance> maintenance;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Equipement> equipements;
-    @OneToMany(mappedBy="vehicule")
+    @OneToMany(mappedBy="vehicule", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
 }
