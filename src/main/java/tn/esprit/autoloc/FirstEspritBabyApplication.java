@@ -1,5 +1,6 @@
 package tn.esprit.autoloc;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import tn.esprit.autoloc.repository.IVehiculeRepository;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Slf4j
 @SpringBootApplication
 public class FirstEspritBabyApplication {
 
@@ -52,7 +54,7 @@ public class FirstEspritBabyApplication {
 						StatutVehicule.DISPONIBLE, null, null, null, null);
 
 				vehiculeRepository.saveAll(List.of(v1, v2, v3));
-				System.out.println(">>> 3 véhicules de démonstration insérés avec succès !");
+				log.info(">>> 3 véhicules de démonstration insérés avec succès !");
 			}
 		};
 	}

@@ -1,6 +1,12 @@
 package tn.esprit.autoloc.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,9 +30,9 @@ public class Agence {
     private String adresse;
     private String telephone;
     @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
-    private List<Vehicule> vehicule;
+    private List<Vehicule> vehicules;
     @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
-    private List<Employe> employee;
+    private List<Employe> employes;
 
     public Long getId() {
         return this.idAgence;
