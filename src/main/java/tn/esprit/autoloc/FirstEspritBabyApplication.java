@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import tn.esprit.autoloc.domain.CategorieVehicule;
 import tn.esprit.autoloc.domain.StatutVehicule;
 import tn.esprit.autoloc.domain.Vehicule;
-import tn.esprit.autoloc.repository.VehiculeRepository;
+import tn.esprit.autoloc.repository.IVehiculeRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,7 +21,7 @@ public class FirstEspritBabyApplication {
 	}
 
 	@Bean
-	CommandLineRunner initVehicules(VehiculeRepository vehiculeRepository) {
+	CommandLineRunner initVehicules(IVehiculeRepository vehiculeRepository) {
 		return args -> {
 			if (vehiculeRepository.count() == 0) {
 				Vehicule v1 = new Vehicule(

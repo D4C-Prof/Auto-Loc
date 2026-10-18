@@ -27,4 +27,12 @@ public class Client {
     private LocalDate dateInscription;
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
+
+    public Long getId() {
+        return this.idClient;
+    }
+
+    public void setId(Long id) {
+        this.idClient = id;
+    }
 }

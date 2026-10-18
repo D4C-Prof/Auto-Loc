@@ -27,4 +27,12 @@ public class Agence {
     private List<Vehicule> vehicule;
     @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
     private List<Employe> employee;
+
+    public Long getId() {
+        return this.idAgence;
+    }
+
+    public void setId(Long id) {
+        this.idAgence = id;
+    }
 }

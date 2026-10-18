@@ -40,4 +40,12 @@ public class Vehicule {
     private List<Equipement> equipements;
     @OneToMany(mappedBy="vehicule", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
+
+    public Long getId() {
+        return this.idVehicule;
+    }
+
+    public void setId(Long id) {
+        this.idVehicule = id;
+    }
 }

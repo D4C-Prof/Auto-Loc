@@ -29,4 +29,12 @@ public class Reservation {
     private Client client;
     @OneToOne(fetch = FetchType.LAZY)
     private Contrat contrat;
+
+    public Long getId() {
+        return this.idReservation;
+    }
+
+    public void setId(Long id) {
+        this.idReservation = id;
+    }
 }
