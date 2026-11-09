@@ -1,5 +1,7 @@
 package tn.esprit.autoloc;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,11 +13,14 @@ import tn.esprit.autoloc.domain.StatutVehicule;
 import tn.esprit.autoloc.domain.Vehicule;
 import tn.esprit.autoloc.repository.IVehiculeRepository;
 
+import io.swagger.v3.oas.models.OpenAPI;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title= "Autoloc", description = "description"))
 public class FirstEspritBabyApplication {
 
 	public static void main(String[] args) {

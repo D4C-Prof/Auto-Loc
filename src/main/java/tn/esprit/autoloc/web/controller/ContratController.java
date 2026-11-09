@@ -26,10 +26,11 @@ public class ContratController {
     }
 
     @Operation(summary = "Consulter un contrat")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Contrat trouvé"),
-            @ApiResponse(responseCode = "404", description = "Contrat introuvable")
-    })
+
+    @ApiResponse(responseCode = "200", description = "Contrat trouvé")
+    @ApiResponse(responseCode = "404", description = "Contrat introuvable")
+    @ApiResponse(responseCode = "405", description = "Not allowed")
+
     @GetMapping("/{id}")
     public Contrat findById(@PathVariable Long id) {
         return contratService.findById(id);

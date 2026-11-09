@@ -11,7 +11,7 @@ public class ContratServiceImpl implements IContratService {
     private final IContratRepository contratRepository;
     @Override
     public Contrat create(Contrat contrat) {
-        if (contrat.getId() != null) {
+        if (contrat.getIdContrat() != null) {
             throw new IllegalArgumentException(
                     "Un nouveau contrat ne doit pas avoir d'identifiant");
         }
