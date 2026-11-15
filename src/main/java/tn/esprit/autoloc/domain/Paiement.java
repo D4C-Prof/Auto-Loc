@@ -26,12 +26,4 @@ public class Paiement {
     private ModePaiement modePaiement;
     @ManyToOne(fetch = FetchType.LAZY)
     private Contrat contrat;
-
-    public Long getId() {
-        return this.idPaiement;
-    }
-
-    public void setId(Long id) {
-        this.idPaiement = id;
-    }
 }

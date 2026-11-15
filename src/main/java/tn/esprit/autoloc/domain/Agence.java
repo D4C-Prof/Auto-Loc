@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,12 +34,4 @@ public class Agence {
     private List<Vehicule> vehicules;
     @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
     private List<Employe> employes;
-
-    public Long getId() {
-        return this.idAgence;
-    }
-
-    public void setId(Long id) {
-        this.idAgence = id;
-    }
 }

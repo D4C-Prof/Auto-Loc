@@ -15,7 +15,7 @@ public class PaiementServiceImpl implements IPaiementService {
 
     @Override
     public Paiement create(Paiement paiement) {
-        if (paiement.getId() != null) {
+        if (paiement.getIdPaiement() != null) {
             throw new IllegalArgumentException(
                     "Un nouveau paiement ne doit pas avoir d'identifiant");
         }

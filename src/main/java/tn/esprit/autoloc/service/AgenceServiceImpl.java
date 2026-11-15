@@ -15,7 +15,7 @@ public class AgenceServiceImpl implements IAgenceService {
 
     @Override
     public Agence create(Agence agence) {
-        if (agence.getId() != null) {
+        if (agence.getIdAgence() != null) {
             throw new IllegalArgumentException(
                     "Une nouvelle agence ne doit pas avoir d'identifiant");
         }

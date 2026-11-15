@@ -15,7 +15,7 @@ public class EmployeServiceImpl implements IEmployeService {
 
     @Override
     public Employe create(Employe employe) {
-        if (employe.getId() != null) {
+        if (employe.getIdEmploye() != null) {
             throw new IllegalArgumentException(
                     "Un nouvel employé ne doit pas avoir d'identifiant");
         }

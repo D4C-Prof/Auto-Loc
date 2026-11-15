@@ -24,12 +24,4 @@ public class Employe {
     private RoleEmploye role;
     @ManyToOne(fetch = FetchType.LAZY)
     private Agence agence;
-
-    public Long getId() {
-        return this.idEmploye;
-    }
-
-    public void setId(Long id) {
-        this.idEmploye = id;
-    }
 }

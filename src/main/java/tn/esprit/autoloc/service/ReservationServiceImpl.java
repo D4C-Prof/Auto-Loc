@@ -15,7 +15,7 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public Reservation create(Reservation reservation) {
-        if (reservation.getId() != null) {
+        if (reservation.getIdReservation() != null) {
             throw new IllegalArgumentException(
                     "Une nouvelle réservation ne doit pas avoir d'identifiant");
         }

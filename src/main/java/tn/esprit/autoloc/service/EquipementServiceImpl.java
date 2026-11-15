@@ -15,7 +15,7 @@ public class EquipementServiceImpl implements IEquipementService {
 
     @Override
     public Equipement create(Equipement equipement) {
-        if (equipement.getId() != null) {
+        if (equipement.getIdEquipement() != null) {
             throw new IllegalArgumentException(
                     "Un nouvel équipement ne doit pas avoir d'identifiant");
         }

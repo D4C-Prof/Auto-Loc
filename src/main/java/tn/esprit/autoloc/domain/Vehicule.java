@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,12 +41,4 @@ public class Vehicule {
     private List<Equipement> equipements;
     @OneToMany(mappedBy="vehicule", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
-
-    public Long getId() {
-        return this.idVehicule;
-    }
-
-    public void setId(Long id) {
-        this.idVehicule = id;
-    }
 }

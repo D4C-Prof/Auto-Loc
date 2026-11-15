@@ -3,19 +3,23 @@ package tn.esprit.autoloc.service;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.autoloc.domain.Maintenance;
+import tn.esprit.autoloc.domain.Vehicule;
 import tn.esprit.autoloc.exception.ResourceNotFoundException;
 import tn.esprit.autoloc.repository.IMaintenanceRepository;
+import tn.esprit.autoloc.repository.IVehiculeRepository;
 
 @Service
 @RequiredArgsConstructor
 public class MaintenanceServiceImpl implements IMaintenanceService {
 
     private final IMaintenanceRepository maintenanceRepository;
+    private final IVehiculeRepository vehiculeRepository;
 
     @Override
     public Maintenance create(Maintenance maintenance) {
-        if (maintenance.getId() != null) {
+        if (maintenance.getIdMaintenance() != null) {
             throw new IllegalArgumentException(
                     "Une nouvelle maintenance ne doit pas avoir d'identifiant");
         }
@@ -49,5 +53,24 @@ public class MaintenanceServiceImpl implements IMaintenanceService {
             throw new ResourceNotFoundException("Maintenance", id);
         }
         maintenanceRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Maintenance affecterMaintenanceAVehicule(Long idMaintenance, Long idVehicule) {
+        Maintenance maintenance = findById(idMaintenance);
+        Vehicule vehicule = vehiculeRepository.findById(idVehicule)
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicule", idVehicule));
+        maintenance.setVehicule(vehicule);
+        return maintenanceRepository.save(maintenance);
+    }
+
+    @Override
+    @Transactional
+    public Maintenance ajouterEtAffecterMaintenanceAVehicule(Maintenance maintenance, Long idVehicule) {
+        Vehicule vehicule = vehiculeRepository.findById(idVehicule)
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicule", idVehicule));
+        maintenance.setVehicule(vehicule);
+        return maintenanceRepository.save(maintenance);
     }
 }

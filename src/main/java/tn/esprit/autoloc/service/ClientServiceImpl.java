@@ -15,7 +15,7 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public Client create(Client client) {
-        if (client.getId() != null) {
+        if (client.getIdClient() != null) {
             throw new IllegalArgumentException(
                     "Un nouveau client ne doit pas avoir d'identifiant");
         }

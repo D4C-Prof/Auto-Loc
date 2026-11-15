@@ -22,12 +22,4 @@ public class Equipement {
     private String libelle;
     @ManyToMany(mappedBy="equipements", fetch = FetchType.LAZY)
     private List<Vehicule> vehicules;
-
-    public Long getId() {
-        return this.idEquipement;
-    }
-
-    public void setId(Long id) {
-        this.idEquipement = id;
-    }
 }

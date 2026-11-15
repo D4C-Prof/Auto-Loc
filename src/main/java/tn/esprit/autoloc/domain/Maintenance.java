@@ -23,12 +23,4 @@ public class Maintenance {
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     private Vehicule vehicule;
-
-    public Long getId() {
-        return this.idMaintenance;
-    }
-
-    public void setId(Long id) {
-        this.idMaintenance = id;
-    }
 }

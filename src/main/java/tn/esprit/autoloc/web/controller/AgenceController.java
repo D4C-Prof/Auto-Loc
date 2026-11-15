@@ -4,10 +4,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.domain.Agence;
+import tn.esprit.autoloc.dto.AgenceDTO;
+import tn.esprit.autoloc.dto.IMapper;
 import tn.esprit.autoloc.service.IAgenceService;
 
 import java.util.List;
@@ -18,11 +21,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AgenceController {
     private final IAgenceService agenceService;
+    private final IMapper mapper;
 
     @Operation(summary = "Liste de toutes les agences")
     @GetMapping
-    public List<Agence> findAll() {
-        return agenceService.findAll();
+    public List<AgenceDTO> findAll() {
+        return mapper.AtoDTOList(agenceService.findAll());
     }
 
     @Operation(summary = "Consulter une agence")
@@ -31,21 +35,23 @@ public class AgenceController {
             @ApiResponse(responseCode = "404", description = "Agence introuvable")
     })
     @GetMapping("/{id}")
-    public Agence findById(@PathVariable Long id) {
-        return agenceService.findById(id);
+    public AgenceDTO findById(@PathVariable Long id) {
+        return mapper.AtoDTO(agenceService.findById(id));
     }
 
     @Operation(summary = "Créer une agence")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Agence create(@RequestBody Agence agence) {
-        return agenceService.create(agence);
+    public AgenceDTO create(@Valid @RequestBody AgenceDTO agenceDTO) {
+        Agence agence = mapper.AtoEntity(agenceDTO);
+        return mapper.AtoDTO(agenceService.create(agence));
     }
 
     @Operation(summary = "Mettre à jour une agence")
     @PutMapping("/{id}")
-    public Agence update(@PathVariable Long id, @RequestBody Agence agence) {
-        return agenceService.update(id, agence);
+    public AgenceDTO update(@PathVariable Long id, @Valid @RequestBody AgenceDTO agenceDTO) {
+        Agence agence = mapper.AtoEntity(agenceDTO);
+        return mapper.AtoDTO(agenceService.update(id, agence));
     }
 
     @Operation(summary = "Supprimer une agence")
