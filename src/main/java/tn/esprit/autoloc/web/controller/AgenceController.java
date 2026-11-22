@@ -2,7 +2,6 @@ package tn.esprit.autoloc.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +25,12 @@ public class AgenceController {
     @Operation(summary = "Liste de toutes les agences")
     @GetMapping
     public List<AgenceDTO> findAll() {
-        return mapper.AtoDTOList(agenceService.findAll());
+        return mapper.aToDTOList(agenceService.findAll());
     }
 
     @Operation(summary = "Consulter une agence")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Agence trouvée"),
-            @ApiResponse(responseCode = "404", description = "Agence introuvable")
-    })
+    @ApiResponse(responseCode = "200", description = "Agence trouvée")
+    @ApiResponse(responseCode = "404", description = "Agence introuvable")
     @GetMapping("/{id}")
     public AgenceDTO findById(@PathVariable Long id) {
         return mapper.AtoDTO(agenceService.findById(id));

@@ -2,7 +2,6 @@ package tn.esprit.autoloc.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,10 +25,8 @@ public class PaiementController {
     }
 
     @Operation(summary = "Consulter un paiement")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Paiement trouvé"),
-            @ApiResponse(responseCode = "404", description = "Paiement introuvable")
-    })
+    @ApiResponse(responseCode = "200", description = "Paiement trouvé")
+    @ApiResponse(responseCode = "404", description = "Paiement introuvable")
     @GetMapping("/{id}")
     public Paiement findById(@PathVariable Long id) {
         return paiementService.findById(id);

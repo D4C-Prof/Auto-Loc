@@ -2,7 +2,6 @@ package tn.esprit.autoloc.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,32 +25,29 @@ public class MaintenanceController {
     @Operation(summary = "Liste de toutes les maintenances")
     @GetMapping
     public List<MaintenanceDTO> findAll() {
-        return mapper.MtoDTOList(maintenanceService.findAll());
+        return maintenanceService.findAll();
     }
 
     @Operation(summary = "Consulter une maintenance")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Maintenance trouvée"),
-            @ApiResponse(responseCode = "404", description = "Maintenance introuvable")
-    })
+    @ApiResponse(responseCode = "200", description = "Maintenance trouvée")
+    @ApiResponse(responseCode = "404", description = "Maintenance introuvable")
     @GetMapping("/{id}")
     public MaintenanceDTO findById(@PathVariable Long id) {
-        return mapper.MtoDTO(maintenanceService.findById(id));
+        return maintenanceService.findById(id);
     }
 
     @Operation(summary = "Créer une maintenance")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MaintenanceDTO create(@Valid @RequestBody MaintenanceDTO maintenanceDTO) {
-        Maintenance maintenance = mapper.MtoEntity(maintenanceDTO);
-        return mapper.MtoDTO(maintenanceService.create(maintenance));
+    public MaintenanceDTO create(@Valid @RequestBody MaintenanceDTO maintenance) {
+        return maintenanceService.create(maintenance);
     }
 
     @Operation(summary = "Mettre à jour une maintenance")
     @PutMapping("/{id}")
     public MaintenanceDTO update(@PathVariable Long id, @Valid @RequestBody MaintenanceDTO maintenanceDTO) {
-        Maintenance maintenance = mapper.MtoEntity(maintenanceDTO);
-        return mapper.MtoDTO(maintenanceService.update(id, maintenance));
+        Maintenance maintenance = mapper.toEntity(maintenanceDTO);
+        return maintenanceService.update(id, maintenance);
     }
 
     @Operation(summary = "Supprimer une maintenance")
@@ -62,30 +58,26 @@ public class MaintenanceController {
     }
 
     @Operation(summary = "Affecter une maintenance à un véhicule")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Maintenance affectée au véhicule avec succès"),
-            @ApiResponse(responseCode = "404", description = "Maintenance ou véhicule introuvable")
-    })
+    @ApiResponse(responseCode = "200", description = "Maintenance affectée au véhicule avec succès")
+    @ApiResponse(responseCode = "404", description = "Maintenance ou véhicule introuvable")
     @PutMapping(value = {"/{idMaintenance}/vehicule/{idVehicule}", "/{idMaintenance}/vehicules/{idVehicule}", "/{idMaintenance}/affecter-vehicule/{idVehicule}"})
     public MaintenanceDTO affecterMaintenanceAVehicule(
             @PathVariable Long idMaintenance,
             @PathVariable Long idVehicule) {
-        Maintenance maintenance = maintenanceService.affecterMaintenanceAVehicule(idMaintenance, idVehicule);
-        return mapper.MtoDTO(maintenance);
+        MaintenanceDTO maintenance = maintenanceService.affecterMaintenanceAVehicule(idMaintenance, idVehicule);
+        return maintenance;
     }
 
     @Operation(summary = "Ajouter et affecter une maintenance à un véhicule")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Maintenance créée et affectée avec succès"),
-            @ApiResponse(responseCode = "404", description = "Véhicule introuvable")
-    })
+    @ApiResponse(responseCode = "201", description = "Maintenance créée et affectée avec succès")
+    @ApiResponse(responseCode = "404", description = "Véhicule introuvable")
     @PostMapping(value = {"/vehicule/{idVehicule}", "/affecter/{idVehicule}"})
     @ResponseStatus(HttpStatus.CREATED)
     public MaintenanceDTO ajouterEtAffecterMaintenanceAVehicule(
             @PathVariable Long idVehicule,
             @Valid @RequestBody MaintenanceDTO maintenanceDTO) {
-        Maintenance maintenance = mapper.MtoEntity(maintenanceDTO);
-        Maintenance saved = maintenanceService.ajouterEtAffecterMaintenanceAVehicule(maintenance, idVehicule);
-        return mapper.MtoDTO(saved);
+        Maintenance maintenance = mapper.toEntity(maintenanceDTO);
+        MaintenanceDTO saved = maintenanceService.ajouterEtAffecterMaintenanceAVehicule(maintenance, idVehicule);
+        return saved;
     }
 }

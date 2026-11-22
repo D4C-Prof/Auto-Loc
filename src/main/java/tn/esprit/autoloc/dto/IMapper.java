@@ -9,47 +9,47 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IMapper {
     // Vehicule
-    VehiculeDTO VtoDTO(Vehicule vehicule);
-    Vehicule VtoEntity(VehiculeDTO vehiculeDTO);
-    List<VehiculeDTO> VtoDTOList(List<Vehicule> vehicules);
+    VehiculeDTO toDTO(Vehicule vehicule);
+    Vehicule toEntity(VehiculeDTO vehiculeDTO);
+    List<VehiculeDTO> vToDTOList(List<Vehicule> vehicules);
 
     // Agence
-    AgenceDTO AtoDTO(Agence agence);
-    Agence AtoEntity(AgenceDTO agenceDTO);
-    List<AgenceDTO> AtoDTOList(List<Agence> agences);
+    AgenceDTO toDTO(Agence agence);
+    Agence toEntity(AgenceDTO agenceDTO);
+    List<AgenceDTO> aToDTOList(List<Agence> agences);
 
     // Equipement
-    EquipementDTO EqtoDTO(Equipement equipement);
-    Equipement EqtoEntity(EquipementDTO equipementDTO);
-    List<EquipementDTO> EqtoDTOList(List<Equipement> equipements);
+    EquipementDTO toDTO(Equipement equipement);
+    Equipement toEntity(EquipementDTO equipementDTO);
+    List<EquipementDTO> toDTOList(List<Equipement> equipements);
 
     // Maintenance
-    MaintenanceDTO MtoDTO(Maintenance maintenance);
-    Maintenance MtoEntity(MaintenanceDTO maintenanceDTO);
-    List<MaintenanceDTO> MtoDTOList(List<Maintenance> maintenances);
+    MaintenanceDTO toDTO(Maintenance maintenance);
+    Maintenance toEntity(MaintenanceDTO maintenanceDTO);
+    List<MaintenanceDTO> mToDTOList(List<Maintenance> maintenances);
 
     // Client
-    ClientDTO CtoDTO(Client client);
-    Client CtoEntity(ClientDTO clientDTO);
-    List<ClientDTO> CtoDTOList(List<Client> clients);
+    ClientDTO toDTO(Client client);
+    Client toEntity(ClientDTO clientDTO);
+    List<ClientDTO> cToDTOList(List<Client> clients);
 
     // Contrat
-    ContratDTO ContratToDTO(Contrat contrat);
-    Contrat ContratToEntity(ContratDTO contratDTO);
-    List<ContratDTO> ContratToDTOList(List<Contrat> contrats);
+    ContratDTO toDTO(Contrat contrat);
+    Contrat toEntity(ContratDTO contratDTO);
+    List<ContratDTO> conToDTOList(List<Contrat> contrats);
 
     // Employe
-    EmployeDTO EtoDTO(Employe employe);
-    Employe EtoEntity(EmployeDTO employeDTO);
-    List<EmployeDTO> EtoDTOList(List<Employe> employes);
+    EmployeDTO toDTO(Employe employe);
+    Employe toEntity(EmployeDTO employeDTO);
+    List<EmployeDTO> eToDTOList(List<Employe> employes);
 
     // Paiement
-    PaiementDTO PtoDTO(Paiement paiement);
-    Paiement PtoEntity(PaiementDTO paiementDTO);
-    List<PaiementDTO> PtoDTOList(List<Paiement> paiements);
+    PaiementDTO toDTO(Paiement paiement);
+    Paiement toEntity(PaiementDTO paiementDTO);
+    List<PaiementDTO> pToDTOList(List<Paiement> paiements);
 
     // Reservation
-    ReservationDTO RtoDTO(Reservation reservation);
-    Reservation RtoEntity(ReservationDTO reservationDTO);
-    List<ReservationDTO> RtoDTOList(List<Reservation> reservations);
+    ReservationDTO toDTO(Reservation reservation);
+    Reservation toEntity(ReservationDTO reservationDTO);
+    List<ReservationDTO> rToDTOList(List<Reservation> reservations);
 }

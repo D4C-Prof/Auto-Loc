@@ -2,7 +2,6 @@ package tn.esprit.autoloc.web.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,10 +25,8 @@ public class EmployeController {
     }
 
     @Operation(summary = "Consulter un employé")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Employé trouvé"),
-            @ApiResponse(responseCode = "404", description = "Employé introuvable")
-    })
+    @ApiResponse(responseCode = "200", description = "Employé trouvé")
+    @ApiResponse(responseCode = "404", description = "Employé introuvable")
     @GetMapping("/{id}")
     public Employe findById(@PathVariable Long id) {
         return employeService.findById(id);

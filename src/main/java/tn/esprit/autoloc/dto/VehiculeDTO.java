@@ -10,15 +10,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tn.esprit.autoloc.domain.CategorieVehicule;
 import tn.esprit.autoloc.domain.StatutVehicule;
+import tn.esprit.autoloc.domain.Vehicule;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehiculeDTO {
+public class VehiculeDTO{
     private Long idVehicule;
 
     @NotBlank(message = "L'immatriculation est obligatoire")
@@ -45,5 +46,5 @@ public class VehiculeDTO {
 
     private AgenceDTO agence;
 
-    private List<EquipementDTO> equipements;
+    private Set<EquipementDTO> equipements;//or List
 }

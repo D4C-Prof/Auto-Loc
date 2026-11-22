@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.autoloc.domain.Maintenance;
 import tn.esprit.autoloc.domain.Vehicule;
+import tn.esprit.autoloc.dto.IMapper;
+import tn.esprit.autoloc.dto.MaintenanceDTO;
 import tn.esprit.autoloc.exception.ResourceNotFoundException;
 import tn.esprit.autoloc.repository.IMaintenanceRepository;
 import tn.esprit.autoloc.repository.IVehiculeRepository;
@@ -16,35 +18,38 @@ public class MaintenanceServiceImpl implements IMaintenanceService {
 
     private final IMaintenanceRepository maintenanceRepository;
     private final IVehiculeRepository vehiculeRepository;
+    private final IMapper mapper;
 
     @Override
-    public Maintenance create(Maintenance maintenance) {
-        if (maintenance.getIdMaintenance() != null) {
+    public MaintenanceDTO create(MaintenanceDTO maintenance) {
+        Maintenance m = mapper.toEntity(maintenance);
+        if (m.getIdMaintenance() != null) {
             throw new IllegalArgumentException(
                     "Une nouvelle maintenance ne doit pas avoir d'identifiant");
         }
-        return maintenanceRepository.save(maintenance);
+
+        return mapper.toDTO(maintenanceRepository.save(m));
     }
 
     @Override
-    public Maintenance findById(Long id) {
-        return maintenanceRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Maintenance", id));
+    public MaintenanceDTO findById(Long id) {
+        return mapper.toDTO(maintenanceRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Maintenance", id)));
     }
 
     @Override
-    public List<Maintenance> findAll() {
-        return maintenanceRepository.findAll();
+    public List<MaintenanceDTO> findAll() {
+        return mapper.mToDTOList(maintenanceRepository.findAll());
     }
 
     @Override
-    public Maintenance update(Long id, Maintenance maintenance) {
-        Maintenance existant = findById(id);
+    public MaintenanceDTO update(Long id, Maintenance maintenance) {
+        Maintenance existant = mapper.toEntity(findById(id));
         existant.setDateDebut(maintenance.getDateDebut());
         existant.setDateFin(maintenance.getDateFin());
         existant.setDescription(maintenance.getDescription());
         existant.setVehicule(maintenance.getVehicule());
-        return maintenanceRepository.save(existant);
+        return mapper.toDTO(maintenanceRepository.save(existant));
     }
 
     @Override
@@ -57,20 +62,25 @@ public class MaintenanceServiceImpl implements IMaintenanceService {
 
     @Override
     @Transactional
-    public Maintenance affecterMaintenanceAVehicule(Long idMaintenance, Long idVehicule) {
-        Maintenance maintenance = findById(idMaintenance);
+    public MaintenanceDTO affecterMaintenanceAVehicule(Long idMaintenance, Long idVehicule) {
+        Maintenance maintenance = mapper.toEntity(findById(idMaintenance));
         Vehicule vehicule = vehiculeRepository.findById(idVehicule)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicule", idVehicule));
         maintenance.setVehicule(vehicule);
-        return maintenanceRepository.save(maintenance);
+        return mapper.toDTO(maintenanceRepository.save(maintenance));
     }
 
     @Override
     @Transactional
-    public Maintenance ajouterEtAffecterMaintenanceAVehicule(Maintenance maintenance, Long idVehicule) {
+    public MaintenanceDTO ajouterEtAffecterMaintenanceAVehicule(Maintenance maintenance, Long idVehicule) {
         Vehicule vehicule = vehiculeRepository.findById(idVehicule)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicule", idVehicule));
         maintenance.setVehicule(vehicule);
-        return maintenanceRepository.save(maintenance);
+        return mapper.toDTO(maintenanceRepository.save(maintenance));
+    }
+
+    @Override
+    public List<MaintenanceDTO> findByVehicule(long id) {
+        return mapper.mToDTOList(maintenanceRepository.findByVehiculeIdVehicule(id));
     }
 }
