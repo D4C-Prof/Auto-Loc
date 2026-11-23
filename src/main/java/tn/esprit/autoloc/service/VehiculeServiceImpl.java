@@ -95,5 +95,5 @@ public class VehiculeServiceImpl implements IVehiculeService {
     public List<VehiculeDTO> findByContrat(long id) {return mapper.vToDTOList(vehiculeRepository.findByReservationsContratIdContrat(id));}
 
     @Override
-    public List<VehiculeDTO> findByMaintenance(long id) {return mapper.vToDTOList(vehiculeRepository.findByMaintenanceIdMaintenance(id));}
+    public List<VehiculeDTO> findByMaintenance(long id) {return mapper.vToDTOList(vehiculeRepository.findByMaintenanceId(id));}
 }

@@ -64,8 +64,7 @@ public class MaintenanceController {
     public MaintenanceDTO affecterMaintenanceAVehicule(
             @PathVariable Long idMaintenance,
             @PathVariable Long idVehicule) {
-        MaintenanceDTO maintenance = maintenanceService.affecterMaintenanceAVehicule(idMaintenance, idVehicule);
-        return maintenance;
+        return maintenanceService.affecterMaintenanceAVehicule(idMaintenance, idVehicule);
     }
 
     @Operation(summary = "Ajouter et affecter une maintenance à un véhicule")
@@ -77,7 +76,14 @@ public class MaintenanceController {
             @PathVariable Long idVehicule,
             @Valid @RequestBody MaintenanceDTO maintenanceDTO) {
         Maintenance maintenance = mapper.toEntity(maintenanceDTO);
-        MaintenanceDTO saved = maintenanceService.ajouterEtAffecterMaintenanceAVehicule(maintenance, idVehicule);
-        return saved;
+        return maintenanceService.ajouterEtAffecterMaintenanceAVehicule(maintenance, idVehicule);
+    }
+
+    @Operation(summary = "afficher maintenances par vehicules")
+    @ApiResponse(responseCode = "200", description = "Liste des voitures trouves")
+    @ApiResponse(responseCode = "404", description = "Liste des voitures non trouves")
+    @GetMapping("/byVehicule/{id}")
+    public List<MaintenanceDTO> afficherParVehicules(@PathVariable long id){
+        return maintenanceService.findByVehicule(id);
     }
 }
